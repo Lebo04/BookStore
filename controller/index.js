@@ -3,9 +3,9 @@ const path = require("path");
 const route = express.Router();
 const bodyParser = require("body-parser");
 
-const { Product, User, Admin } = require("../model");
+const { Product, User, Admin, Item } = require("../model");
 const user = new User();
-const product = new Product();
+const item = new Item();
 const admin = new Admin();
 
 route.get("^/$|/KG Books", (req, res) => {
@@ -65,28 +65,24 @@ route.delete("/admin/:id", (req, res) => {
 });
 
 //-------Products---------//
-route.get("/products", (req, res) => {
-  product.getProducts(req, res);
+route.get("/items", (req, res) => {
+  item.getItems(req, res);
 });
 
-route.get("/product/:id", (req, res) => {
-  product.getProduct(req, res);
+route.get("/item/:id", (req, res) => {
+  item.getItem(req, res);
 });
 
-route.post("/product", bodyParser.json(), (req, res) => {
-  product.addProduct(req, res);
+route.post("/item", bodyParser.json(), (req, res) => {
+  item.addItem(req, res);
 });
 
-route.put("/product/:id", bodyParser.json(), (req, res) => {
-  product.updateProduct(req, res);
+route.put("/item/:id", bodyParser.json(), (req, res) => {
+  item.updateItem(req, res);
 });
 
-route.put("/product/:id", bodyParser.json(), (req, res) => {
-  product.forgotPassword(req, res);
-});
-
-route.delete("/product/:id", (req, res) => {
-  product.deleteProduct(req, res);
+route.delete("/item/:id", (req, res) => {
+  item.deleteItem(req, res);
 });
 
 module.exports = route;

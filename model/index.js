@@ -266,8 +266,8 @@ class Admin {
     });
   }
 }
-class Product {
-  addProduct(req, res) {
+class Item {
+  addItem(req, res) {
     const strQry = `
         INSERT INTO Products
         SET ?
@@ -280,7 +280,7 @@ class Product {
       }
     });
   }
-  updateProduct(req, res) {
+  updateItem(req, res) {
     const detail = req.body;
     if (detail.userPass != null || detail.userPass != undefined)
       detail.userPass = hashSync(detail.userPass, 15);
@@ -299,7 +299,7 @@ class Product {
       }
     });
   }
-  deleteProduct(req, res) {
+  deleteItem(req, res) {
     const strQry = `
     DELETE FROM Products
     WHERE id = ?;
@@ -310,7 +310,7 @@ class Product {
       res.status(200).json({ msg: "A product has been deleted" });
     });
   }
-  getProduct(req, res) {
+  getItem(req, res) {
     const strQry = `
     SELECT id, prodName, prodDescription, category, price, prodQuantity, imgURL
     FROM Products
@@ -322,7 +322,7 @@ class Product {
       res.status(200).json({ result: data });
     });
   }
-  getProducts(req, res) {
+  getItems(req, res) {
     const strQry = `
     SELECT id, prodName, prodDescription, category, price, prodQuantity, imgURL
     FROM Products;
@@ -336,7 +336,7 @@ class Product {
 }
 
 module.exports = {
-  Product,
+  Item,
   User,
   Admin,
 };
