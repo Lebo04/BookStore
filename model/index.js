@@ -338,5 +338,5 @@ class Product {
 module.exports = {
   Product,
   User,
-  Admin
+  Admin,
 };
