@@ -18,21 +18,21 @@ class User {
         `;
     db.query(strQry, [detail], (err) => {
       if (err) {
-        request.status(401).json({ err });
+        res.status(401).json({ err });
       } else {
         const token = createToken(user);
         res.cookie("RightUser", token, {
           httpOnly: true,
           maxAge: 3600000,
         });
-        request.status(200).json({ msg: "A new user has been created." });
+        res.status(200).json({ msg: "A new user has been created." });
       }
     });
   }
   login(req, res) {
     const { emailAdd, userPass } = req.body;
     const strQry = `
-        SELECT userID, firstName, lastName, gender, emailAdd, userPass, userRole, userProfile
+        SELECT userID, firstName, lastName, emailAdd, userPass
         FROM Users
         WHERE emailAdd = '${emailAdd}';
     `;
@@ -108,7 +108,7 @@ class User {
   }
   getUsers(req, res) {
     const strQry = `
-    SELECT userID, firstName, lastName, gender, cellphoneNum, emailAdd, userRole, userProfile, joinDate
+    SELECT userID, firstName, lastName, cellphoneNum, emailAdd
     FROM Users;
     `;
 
@@ -150,14 +150,14 @@ class Admin {
         `;
     db.query(strQry, [detail], (err) => {
       if (err) {
-        request.status(401).json({ err });
+        res.status(401).json({ err });
       } else {
         const token = createToken(user);
         res.cookie("RightUser", token, {
           httpOnly: true,
           maxAge: 3600000,
         });
-        request.status(200).json({ msg: "A new admin has been created." });
+        res.status(200).json({ msg: "A new admin has been created." });
       }
     });
   }
@@ -174,7 +174,7 @@ class Admin {
       if (!data || data == null) {
         res.status(401).json({ err: "Incorrect email address" });
       } else {
-        await compare(userPass, data[0].userPass, (cErr, cResult) => {
+        await compare(adminPass, data[0].adminPass, (cErr, cResult) => {
           if (cErr) throw cErr;
           const token = createToken({
             adminPass,

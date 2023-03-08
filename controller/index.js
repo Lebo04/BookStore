@@ -30,7 +30,7 @@ route.put("/user/:id", bodyParser.json(), (req, res) => {
   user.updateUser(req, res);
 });
 
-route.post("/register", bodyParser.json(), (req, res) => {
+route.post("/registerUser", bodyParser.json(), (req, res) => {
   user.createUser(req, res);
 });
 
@@ -40,7 +40,7 @@ route.delete("/user/:id", (req, res) => {
 
 //------Admin--------//
 
-route.post("/login", bodyParser.json(), (req, res) => {
+route.post("/signIn", bodyParser.json(), (req, res) => {
   admin.login(req, res);
 });
 
@@ -56,7 +56,7 @@ route.put("/admin/:id", bodyParser.json(), (req, res) => {
   admin.updateAdmin(req, res);
 });
 
-route.post("/register", bodyParser.json(), (req, res) => {
+route.post("/registerAdmin", bodyParser.json(), (req, res) => {
   admin.createAdmin(req, res);
 });
 
