@@ -1,4 +1,4 @@
-const db = require("../config");
+const db = require("../Config");
 const { hash, compare, hashSync } = require("bcrypt");
 const { createToken } = require("../middleware/AuthenticatedUser");
 
