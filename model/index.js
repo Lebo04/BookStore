@@ -274,6 +274,7 @@ class Item {
         `;
     db.query(strQry, [req.body], (err) => {
       if (err) {
+        console.log(err);
         res.status(400).json({ err: "Unable to add a new product" });
       } else {
         res.status(200).json({ msg: "Successfully added a new product" });
@@ -312,7 +313,7 @@ class Item {
   }
   getItem(req, res) {
     const strQry = `
-    SELECT id, prodName, prodDescription, category, price, prodQuantity, imgURL
+    SELECT id, prodName, prodDescription, category, price, prodQuantity, imgURL, publishDate
     FROM Products
     WHERE id = ?;    
     `;
@@ -324,7 +325,7 @@ class Item {
   }
   getItems(req, res) {
     const strQry = `
-    SELECT id, prodName, prodDescription, category, price, prodQuantity, imgURL
+    SELECT id, prodName, prodDescription, category, price, prodQuantity, imgURL, publishDate
     FROM Products;
     `;
 
