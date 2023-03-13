@@ -1,26 +1,10 @@
 <template>
-  <div>
-    <!-- <div class="mb-3">
-      <label for="exampleFormControlInput1" class="form-label"
-        >Email address</label
-      >
-      <input
-        type="email"
-        class="form-control"
-        id="exampleFormControlInput1"
-        placeholder="name@example.com"
-      />
-    </div>
-    <div class="mb-3">
-      <label for="inputPassword" class="col-sm-2 col-form-label"
-        >Password</label
-      >
-      <div class="col-sm-10">
-        <input type="password" class="form-control" id="inputPassword" />
-      </div>
-    </div> -->
-
+  <div class="log">
     <div class="container">
+        <!-- <div class="input-group flex-nowrap">
+            <span class="input-group-text" id="addon-wrapping">@</span>
+            <input type="email" class="form-control" placeholder="Email Address" aria-label="Email" aria-describedby="addon-wrapping" required>
+          </div> -->
       <div class="row">
         <div class="col">
           <form>
@@ -68,12 +52,20 @@
 export default {};
 </script>
 <style scoped>
+.log {
+    background-color: black;
+    height: 92vh;
+    display: flex;
+    background-image: url(https://i.postimg.cc/cHr4pgTJ/464155.webp);
+    background-repeat: no-repeat;
+    background-size: cover;
+}
 .container {
-  margin-top: 10rem;
+    transform: translateY(60%);
   width: 20rem;
   height: 17rem;
   box-sizing: border-box;
-  /*background-color: ;*/
+  background-color: crimson;
 }
 
 .col .links {

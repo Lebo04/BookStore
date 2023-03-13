@@ -20,7 +20,7 @@ export default {};
 .home {
   background-image: url("https://i.postimg.cc/htGmqcMf/2795953.jpg");
   background-size: cover;
-  height: 41rem;
+  height: 84.4vh;
 }
 
 .home h2, .home h1 {
@@ -48,7 +48,7 @@ export default {};
 
 .home h2::before {
   background-color: crimson;
-  animation: typewriter 4s steps(34) forwards;
+  animation: typewriter 7s steps(34) forwards;
 }
 
 .home h2::after {

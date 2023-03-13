@@ -1,4 +1,6 @@
 <template>
+  <h1 class="title">Books</h1>
+
   <div class="container">
     <div class="row">
       <div class="col-md-4 g-3" v-for="item in items" :key="item.prodID">
@@ -31,7 +33,27 @@ export default {
 };
 </script>
 <style scoped>
-.card {
-  flex-direction: column;
+.title {
+  position: relative;
+  text-align: center;
+  font-size: 3rem;
+  font-weight: 600;
+  margin-bottom: 4rem;
+  padding-bottom: 2rem;
+}
+
+.title::before {
+  content: "";
+  position: absolute;
+  bottom: 0rem;
+  left: 50%;
+  width: 13rem;
+  height: 0.2rem;
+  background: #111;
+  transform: translateX(-50%);
+}
+.title::after {
+  position: absolute;
+  left: 50%;
 }
 </style>
