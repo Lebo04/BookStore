@@ -3,7 +3,7 @@ const path = require("path");
 const route = express.Router();
 const bodyParser = require("body-parser");
 
-const { Product, User, Admin, Item } = require("../model");
+const { User, Admin, Item } = require("../model");
 const user = new User();
 const item = new Item();
 const admin = new Admin();
