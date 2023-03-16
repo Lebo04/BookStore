@@ -27,21 +27,35 @@
                     <a class="nav-link"><router-link to="/cart">Cart</router-link></a>
                   </li>
                   <li class="nav-item">
+                    <a class="nav-link"><router-link to="/admin">Admin</router-link></a>
+                  </li>
+                  <li class="nav-item">
                     <a class="nav-link"><router-link to="/contact">Contact Us</router-link></a>
                   </li>
                 </ul>
+                <div>
+                  <button class="btn btn-secondary nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                      0 Cart
+                    </a>
+                    <CartComp />
+                  </button>
+                </div>
                 <form class="d-flex" role="search">
                   <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                  <button class="btn btn-outline-dark" type="submit">Search</button>
                 </form>
               </div>
+              
             </div>
           </nav>
     </div>
 </template>
 <script>
+import CartComp from '@/components/CartComp.vue'
 export default {
-    
+    components: {
+      CartComp
+    }
 }
 </script>
 <style scoped>

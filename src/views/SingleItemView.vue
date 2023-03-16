@@ -1,15 +1,15 @@
 <template>
-    <div>
-       <h2>More...</h2> 
-
-       
-    </div>
+  <div>
+    <SingleItem />
+  </div>
 </template>
 <script>
+import SingleItem from '@/components/SingleItem.vue'
 export default {
-    
+  components: {
+    SingleItem
+  }
 }
+
 </script>
-<style lang="">
-    
-</style>
+<style></style>
