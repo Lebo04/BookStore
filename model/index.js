@@ -313,7 +313,7 @@ class Item {
   }
   getItem(req, res) {
     const strQry = `
-    SELECT id, prodName, prodDescription, category, price, prodQuantity, author, imgURL, publishDate
+    SELECT id, prodName, prodDescription, category, price, author, imgURL, publishDate
     FROM Products
     WHERE id = ?;    
     `;
@@ -325,7 +325,7 @@ class Item {
   }
   getItems(req, res) {
     const strQry = `
-    SELECT id, prodName, prodDescription, category, price, prodQuantity, author, imgURL, publishDate
+    SELECT id, prodName, prodDescription, category, price, author, imgURL, publishDate
     FROM Products;
     `;
 
