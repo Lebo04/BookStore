@@ -14,7 +14,7 @@ class User {
 
     const strQry = `
         INSERT INTO Users
-        SET ?
+        SET ?;
         `;
     db.query(strQry, [detail], (err) => {
       if (err) {
