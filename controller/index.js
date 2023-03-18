@@ -3,10 +3,11 @@ const path = require("path");
 const route = express.Router();
 const bodyParser = require("body-parser");
 
-const { User, Admin, Item } = require("../model");
+const { User, Admin, Item, Cart } = require("../model");
 const user = new User();
 const item = new Item();
 const admin = new Admin();
+const cart = new Cart();
 
 route.get("^/$|/KG Books", (req, res) => {
   res.status(200).sendFile(path.join(__dirname, "../view/index.html"));
@@ -83,6 +84,31 @@ route.put("/item/:id", bodyParser.json(), (req, res) => {
 
 route.delete("/item/:id", (req, res) => {
   item.deleteItem(req, res);
+});
+
+//-------Cart---------//
+route.get("/user/:id/carts", (req, res) => {
+  cart.getCartItems(req, res);
+});
+
+route.get("/user/:id/cart", (req, res) => {
+  item.getCartItem(req, res);
+});
+
+route.post("/user/:id/cart", bodyParser.json(), (req, res) => {
+  item.addToCart(req, res);
+});
+
+route.put("/user/:id/cart/:id", bodyParser.json(), (req, res) => {
+  item.updateCart(req, res);
+});
+
+route.delete("/user/:id/cart", (req, res) => {
+  item.deleteCart(req, res);
+});
+
+route.delete("/user/:id/cart/:id", (req, res) => {
+  item.deleteCart(req, res);
 });
 
 module.exports = route;

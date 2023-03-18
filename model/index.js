@@ -36,7 +36,7 @@ class User {
         FROM Users
         WHERE emailAdd = '${emailAdd}';
     `;
-
+ 
     db.query(strQry, async (err, data) => {
       if (err) throw err;
       if (!data || data == null) {
@@ -335,9 +335,79 @@ class Item {
     });
   }
 }
+class Cart {
+  addToCart(req, res) {
+    const strQry = `
+        INSERT INTO Cart
+        SET ?
+        `;
+    db.query(strQry, [req.body], (err) => {
+      if (err) {
+        console.log(err);
+        res.status(400).json({ err: "Unable to add to cart" });
+      } else {
+        res.status(200).json({ msg: "Successfully added to the cart" });
+      }
+    });
+  }
+  updateCart(req, res) {
+    const detail = req.body;
+    if (detail.userPass != null || detail.userPass != undefined)
+      detail.userPass = hashSync(detail.userPass, 15);
+
+    const strQry = `
+        UPDATE Cart
+        SET ?
+        WHERE CartID = ?;
+        `;
+
+    db.query(strQry, [req.body, req.params.id], (err) => {
+      if (err) {
+        res.status(400).json({ msg: "Unable to update the cart" });
+      } else {
+        res.status(200).json({ msg: "The cart has been updated" });
+      }
+    });
+  }
+  deleteCart(req, res) {
+    const strQry = `
+    DELETE FROM Cart
+    WHERE cartID = ?;
+    `;
+
+    db.query(strQry, [req.params.id], (err) => {
+      if (err) throw err;
+      res.status(200).json({ msg: "A product has been deleted" });
+    });
+  }
+  getCartItem(req, res) {
+    const strQry = `
+    SELECT cartID, prodName, price, imgURL, totalPrice
+    FROM Cart
+    WHERE cartID = ?;    
+    `;
+
+    db.query(strQry, [req.params.id], (err, data) => {
+      if (err) throw err;
+      res.status(200).json({ result: data });
+    });
+  }
+  getCartItems(req, res) {
+    const strQry = `
+    SELECT cartID, prodName, price, imgURL, totalPrice
+    FROM Cart;
+    `;
+
+    db.query(strQry, (err, data) => {
+      if (err) throw err;
+      res.status(200).json({ results: data });
+    });
+  }
+}
 
 module.exports = {
   Item,
   User,
   Admin,
+  Cart
 };
