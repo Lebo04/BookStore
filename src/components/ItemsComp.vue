@@ -1,7 +1,12 @@
 <template>
   <h1 class="title">Books</h1>
+  
+  <div v-if="books == undefined">
+    <SpinnerComp />
+  </div>
 
   <div class="container">
+ 
     <div class="row">
       <div class="col-md-6 g-3" v-for="book in books" :key="book.id">
         <div class="card" style="width: 30rem; height: 16rem">
@@ -17,7 +22,10 @@
           <div class="card-body">
             <h5 class="card-title">{{ book.prodName }}</h5>
             <h6>{{ book.category }}</h6>
-            <router-link :to="{ name: 'single', params: { id: book.id } }"
+            <router-link v-if="this.$store.state.userAuth" :to="{ name: 'single', params: { id: book.id } }"
+              >View more..</router-link
+            >
+            <router-link v-if="this.$store.state.userAuth" :to="{ name: 'cart', params: { id: book.id } }"
               >View more..</router-link
             >
           </div>
@@ -27,11 +35,19 @@
   </div>
 </template>
 <script>
+  import SpinnerComp from './SpinnerComp.vue';
+
 export default {
+  components: {
+    SpinnerComp
+  },
   computed: {
     books() {
       return this.$store.state.books;
     },
+    spinner() {
+      return this.$store.state.spinnerShow
+    }
   },
   created() {
     this.$store.dispatch("getItems");

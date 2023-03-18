@@ -1,7 +1,7 @@
 <template>
-    <div>
-        <footer>
-            <!-- <div class="container-sm">
+  <div>
+    <footer min-vh="100">
+      <!-- <div class="container-sm">
               <div class="row th">
                 <div class="col g-3"><h5>Address</h5></div>
                 <div class="col g-3"><h5>Contact</h5></div>
@@ -63,17 +63,27 @@
               </div>
             </div> -->
 
-            <p>&copy; 2023 KG Book Store. All Rights Reserved</p>
-
-          </footer>
-    </div>
+      <!-- <p>&copy; 2023 KG Book Store. All Rights Reserved</p> -->
+      <p>CopyRight @{{currentYear}}</p>
+    </footer>
+  </div>
 </template>
 <script>
 export default {
-    
-}
+  data() {
+    return {
+      currentYear: new Date().getFullYear(),
+    };
+  },
+};
 </script>
 <style scoped>
+
+footer {
+  position: fixed;
+  bottom: 0;
+  width: 100vw;
+}
 .mapouter {
   position: relative;
   text-align: center;

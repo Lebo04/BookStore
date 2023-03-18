@@ -1,4 +1,7 @@
 <template>
+  <div v-if="book == undefined">
+    <SpinnerComp />
+  </div>
   <h1 class="title">{{ book?.prodName }}</h1>
   <div class="container">
     <div class="row">
@@ -14,17 +17,21 @@
       </div>
       <div class="col">
         <h6>Book Genre: {{ book?.category }}</h6>
+        <h6>Price: R{{book?.price}}</h6>
         <p>
           {{ book?.prodDescription }}
         </p>
+        <button><i class="fa-duotone fa-cart-shopping"></i></button>
       </div>
     </div>
   </div>
-
-
 </template>
 <script>
+import SpinnerComp from "@/components/SpinnerComp.vue";
 export default {
+  components: {
+    SpinnerComp,
+  },
   computed: {
     book() {
       return this.$store.state.book;
@@ -32,6 +39,12 @@ export default {
   },
   created() {
     this.$store.dispatch("getItem", this.$route.params.id);
+  },
+
+  methods: {
+    addToCart() {
+      this.$store.dispatch("addToCart");
+    },
   },
 };
 </script>

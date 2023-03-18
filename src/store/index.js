@@ -7,13 +7,16 @@ export default createStore({
   state: {
     Users: null,
     user: null,
+    userAuth: false,
+    token: null,
     books: null,
     book: null,
     Admins: null,
     admin: null,
-    showSpinner: true,
+    spinnerShow: true,
     message: null,
     loggedUser: null,
+    cart: null
   },
   getters: {},
   mutations: {
@@ -40,7 +43,14 @@ export default createStore({
     },
     setLoggedUser(state, value) {
       state.loggedUser = value;
+      state.userAuth = true
     },
+    setToken(state, value) {
+      state.token = value;
+    },
+    setCart(state, value) {
+      state.cart = value;
+    }
   },
   actions: {
     async getItems(context) {
@@ -85,11 +95,12 @@ export default createStore({
     },
     async signIn(context, payload) {
       const res = await axios.post(`${bookURL}/login`, payload);
-      const { result, msg, err } = await res.data;
+      const { result, msg, err, token } = await res.data;
       if (result) {
         context.commit("setLoggedUser", result);
         console.log(result);
         context.commit("setMessage", msg);
+        context.commit("setToken", token);
       } else {
         context.commit("setMessage", err);
       }
@@ -108,6 +119,29 @@ export default createStore({
       const { result, err } = await res.data;
       if (result) {
         context.commit("deleteUser", result);
+      } else {
+        context.commit("setMessage", err);
+      }
+    },
+    async addBook(context, payload) {
+      console.log("Statement 1 reached");
+      const res = await axios.post(`${bookURL}/item`, payload); // error
+      console.log("Statement 2 reached");
+      const { result, err } = await res.data;
+      if (result) {
+        console.log(result);
+        context.commit("setMessage", result);
+      } else {
+        context.commit("setMessage", err);
+      }
+    },
+    async addToCart(context, id) {
+      const res = await axios.post(`${bookURL}/user/${id}/cart`)
+      console.log("Statement 2 reached");
+      const { result, err } = await res.data;
+      if (result) {
+        console.log(result);
+        context.commit("setMessage", result);
       } else {
         context.commit("setMessage", err);
       }

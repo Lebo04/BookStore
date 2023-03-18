@@ -34,12 +34,12 @@
                   </li>
                 </ul>
                 <div>
-                  <button class="btn btn-secondary nav-item dropdown">
+                  <!-- <button class="btn btn-secondary nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                      0 Cart
+                      0 <i class="fa-duotone fa-cart-shopping"></i>
                     </a>
                     <CartComp />
-                  </button>
+                  </button> -->
                 </div>
                 <form class="d-flex" role="search">
                   <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
@@ -51,11 +51,8 @@
     </div>
 </template>
 <script>
-import CartComp from '@/components/CartComp.vue'
 export default {
-    components: {
-      CartComp
-    }
+   
 }
 </script>
 <style scoped>
