@@ -164,15 +164,7 @@ export default {
 
   methods: {
     signUp() {
-      let data = {
-        firstName: this.payload.firstName,
-        lastName: this.payload.lastName,
-        emailAdd: this.payload.emailAdd,
-        cellphoneNum: this.payload.cellphoneNum,
-        userPass: this.payload.userPass,
-      };
-      console.log("Data: ", data);
-      this.$store.dispatch("registerUser", data);
+      this.$store.dispatch("registerUser", this.payload);
     },
   },
 };

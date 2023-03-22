@@ -20,7 +20,7 @@
           <td>{{ item.emailAdd }}</td>
           <td>{{ item.cellphoneNum }}</td>
           <td>
-            <button class="delete"  v-on:click="deleteItem(item.userID)">
+            <button class="delete" v-on:click="deleteUser(item.userID)">
               <i class="fa-solid fa-trash"></i>
             </button>
           </td>
@@ -59,7 +59,7 @@
             </button>
           </td>
           <td>
-            <button class="delete" onclick="deleteProduct(this)">
+            <button class="delete" v-on:click="deleteAdmin(item.adminID)">
               <i class="fa-solid fa-trash"></i>
             </button>
           </td>
@@ -104,7 +104,7 @@
             </button>
           </td>
           <td>
-            <button class="delete">
+            <button class="delete" v-on:click="deleteItem(item.id )">
               <i class="fa-solid fa-trash"></i>
             </button>
           </td>
@@ -124,16 +124,23 @@ export default {
     },
     items() {
       return this.$store.state.books;
-    },
-    deleteItem() {
-      return this.$store.state.user;
     }
   },
   created() {
     this.$store.dispatch("getUsers");
     this.$store.dispatch("getAdmins");
     this.$store.dispatch("getItems");
-    this.$store.dispatch("deleteItem", this.$route.params.id);
+  },
+  methods: {
+    deleteUser(id) {
+      this.$store.dispatch("deleteUser", id);
+    },
+    deleteAdmin(id) {
+      this.$store.dispatch("deleteAdmin", id)
+    },
+    deleteItem(id) {
+      this.$store.dispatch("deleteItem", id)
+    }
   },
 };
 </script>

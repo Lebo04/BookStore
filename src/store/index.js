@@ -1,5 +1,7 @@
 import { createStore } from "vuex";
 import axios from "axios";
+import { useCookies } from "vue3-cookies";
+const {cookies} = useCookies();
 const bookURL = "https://kg-bookstore.onrender.com";
 // const bookURL = "http://localhost:3000";
 
@@ -16,7 +18,8 @@ export default createStore({
     spinnerShow: true,
     message: null,
     loggedUser: null,
-    cart: null
+    deletedUser: null,
+    cart: null,
   },
   getters: {},
   mutations: {
@@ -33,7 +36,7 @@ export default createStore({
       state.user = value;
     },
     deleteUser(state, value) {
-      state.user = value;
+      state.deletedUser = value;
     },
     setAdmins(state, value) {
       state.Admins = value;
@@ -43,15 +46,25 @@ export default createStore({
     },
     setLoggedUser(state, value) {
       state.loggedUser = value;
-      state.userAuth = true
+      state.userAuth = true;
     },
     setToken(state, value) {
       state.token = value;
     },
     setCart(state, value) {
       state.cart = value;
-    }
-  },
+    },
+    sorting: (state) => { 
+        state.books.sort((a, b) => {
+          return a.price - b.price;
+        });
+        if (!state.asc) {
+          state.books.reverse();
+        }
+        state.asc = !state.asc;
+      }
+},
+   
   actions: {
     async getItems(context) {
       const res = await axios.get(`${bookURL}/items`);
@@ -83,7 +96,7 @@ export default createStore({
     },
     async registerUser(context, payload) {
       console.log("Statement 1 reached");
-      const res = await axios.post(`${bookURL}/registerUser`, payload); // error
+      const res = await axios.post(`${bookURL}/registerUser`, payload);
       console.log("Statement 2 reached");
       const { result, err } = await res.data;
       if (result) {
@@ -100,7 +113,7 @@ export default createStore({
         context.commit("setLoggedUser", result);
         console.log(result);
         context.commit("setMessage", msg);
-        context.commit("setToken", token);
+        cookies.set("RightUser", token);
       } else {
         context.commit("setMessage", err);
       }
@@ -114,11 +127,29 @@ export default createStore({
         context.commit("setMessage", err);
       }
     },
-    async deleteItem(context, id) {
-      const res = await axios.delete(`${bookURL}/user/${id}`)
+    async deleteUser(context, id) {
+      const res = await axios.delete(`${bookURL}/user/${id}`);
       const { result, err } = await res.data;
       if (result) {
-        context.commit("deleteUser", result);
+        context.commit("setUsers", result);
+      } else {
+        context.commit("setMessage", err);
+      }
+    },
+    async deleteAdmin(context, id) {
+      const res = await axios.delete(`${bookURL}/admin/${id}`);
+      const { result, err } = await res.data;
+      if (result) {
+        context.commit("setAdmins", result);
+      } else {
+        context.commit("setMessage", err);
+      }
+    },
+    async deleteItem(context, id) {
+      const res = await axios.delete(`${bookURL}/item/${id}`);
+      const { result, err } = await res.data;
+      if (result) {
+        context.commit("setItems", result);
       } else {
         context.commit("setMessage", err);
       }
@@ -136,7 +167,7 @@ export default createStore({
       }
     },
     async addToCart(context, id) {
-      const res = await axios.post(`${bookURL}/user/${id}/cart`)
+      const res = await axios.post(`${bookURL}/user/${id}/cart`);
       console.log("Statement 2 reached");
       const { result, err } = await res.data;
       if (result) {
@@ -145,7 +176,7 @@ export default createStore({
       } else {
         context.commit("setMessage", err);
       }
-    }
+    },
   },
   modules: {},
 });
