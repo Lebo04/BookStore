@@ -1,7 +1,7 @@
 import { createStore } from "vuex";
 import axios from "axios";
 import { useCookies } from "vue3-cookies";
-const {cookies} = useCookies();
+const { cookies } = useCookies();
 const bookURL = "https://kg-bookstore.onrender.com";
 // const bookURL = "http://localhost:3000";
 
@@ -54,17 +54,29 @@ export default createStore({
     setCart(state, value) {
       state.cart = value;
     },
-    sorting: (state) => { 
-        state.books.sort((a, b) => {
-          return a.price - b.price;
-        });
-        if (!state.asc) {
-          state.books.reverse();
-        }
-        state.asc = !state.asc;
+    sorting: (state) => {
+      state.books.sort((a, b) => {
+        return a.price - b.price;
+      });
+      if (!state.asc) {
+        state.books.reverse();
       }
-},
-   
+      state.asc = !state.asc;
+    },
+    // filtering: (state) => {
+    //   try {
+    //     if (!shoe.value.length) throw "Enter a shoe name";
+    //     heelsList = heelsList.filter((items) => {
+    //       return state.proName.toLowerCase().includes(shoe.value.toLowerCase());
+    //     });
+    //     if (!heelsList.length) throw "This shoe is not yet available";
+    //     display();
+    //   } catch (data) {
+    //     item.innerHTML = data;
+    //   } 
+    // }
+  },
+
   actions: {
     async getItems(context) {
       const res = await axios.get(`${bookURL}/items`);

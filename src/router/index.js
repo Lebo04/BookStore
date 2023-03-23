@@ -1,6 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '../views/HomeView.vue'
-// import store from '../store'
+import ForgotPassword from '../components/ForgotPassword.vue'
 
 
 const routes = [
@@ -18,11 +18,6 @@ const routes = [
     path: '/login',
     name: 'login',
     component: () => import('../views/LogInView.vue'),
-    // beforeEnter() {
-    //   if(!store.state.user) {
-    //     router.push({name: 'login'});
-    //   }
-    // }
   },
   {
     path: '/signup',
@@ -53,6 +48,10 @@ const routes = [
     path: '/single/:id',
     name: 'single',
     component: () => import('../views/SingleItemView.vue')
+  },
+  {
+    path: '/forgot',
+    component: ForgotPassword
   }
 ]
 

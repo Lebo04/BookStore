@@ -24,7 +24,7 @@
 
       <button type="submit" class="btn btn-primary">Submit</button>
       <div class="links">
-        <a href="">Forgot password</a>
+        <router-link to="/forgot">Forgot password</router-link>
         <br />
         <a href=""><router-link to="/signup">Sign Up</router-link></a>
       </div>
