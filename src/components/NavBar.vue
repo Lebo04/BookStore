@@ -30,6 +30,9 @@
                     <a class="nav-link"><router-link to="/admin">Admin</router-link></a>
                   </li>
                   <li class="nav-item">
+                    <a class="nav-link"><router-link to="/profile">Profile</router-link></a>
+                  </li>
+                  <li class="nav-item">
                     <a class="nav-link"><router-link to="/contact">Contact Us</router-link></a>
                   </li>
                 </ul>

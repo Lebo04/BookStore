@@ -134,12 +134,16 @@ export default {
   methods: {
     deleteUser(id) {
       this.$store.dispatch("deleteUser", id);
+      this.$store.dispatch("getUsers");
     },
     deleteAdmin(id) {
-      this.$store.dispatch("deleteAdmin", id)
+      this.$store.dispatch("deleteAdmin", id);
+      this.$store.dispatch("getAdmins");
     },
     deleteItem(id) {
-      this.$store.dispatch("deleteItem", id)
+      this.$store.dispatch("deleteItem", id);
+      this.$store.dispatch("getItems");
+
     }
   },
 };

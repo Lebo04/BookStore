@@ -6,7 +6,7 @@ import ForgotPassword from '../components/ForgotPassword.vue'
 const routes = [
   {
     path: '/',
-    name: 'home',
+    name: 'homeView',
     component: HomeView
   },
   {
@@ -52,6 +52,11 @@ const routes = [
   {
     path: '/forgot',
     component: ForgotPassword
+  },
+  {
+    path: '/profile',
+    name: 'profile',
+    component: () => import('../views/ProfileView.vue')
   }
 ]
 

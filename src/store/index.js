@@ -179,12 +179,14 @@ export default createStore({
       }
     },
     async addToCart(context, id) {
+      console.log("Statement 1 reached");
       const res = await axios.post(`${bookURL}/user/${id}/cart`);
       console.log("Statement 2 reached");
-      const { result, err } = await res.data;
+      const { result, err, token } = await res.data;
       if (result) {
         console.log(result);
-        context.commit("setMessage", result);
+        cookies.get('RightUser', token)
+        context.commit("setCart", result);
       } else {
         context.commit("setMessage", err);
       }

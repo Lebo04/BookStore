@@ -4,15 +4,14 @@
   </div>
   <div class="log">
     <form @submit.prevent="login">
+      <h2>LogIn</h2>
       <div class="mb-3">
-        <label for="exampleInputEmail1" class="form-label">Email address</label>
         {{ this.loggedUser?.firstName }}
-        <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" required v-model="payload.emailAdd">
+        <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Email address" required v-model="payload.emailAdd">
         <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
       </div>
       <div class="mb-3">
-        <label for="exampleInputPassword1" class="form-label">Password</label>
-        <input type="password" class="form-control" id="exampleInputPassword1" required v-model="payload.userPass">
+        <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password" required v-model="payload.userPass">
       </div>
       <div class="mb-3 form-check">
         <input type="checkbox" class="form-check-input" id="exampleCheck1" required>
@@ -20,7 +19,6 @@
       </div>
       <label for="" v-show="userMsg">{{userMsg}}</label>
       <br>
-      3
 
       <button type="submit" class="btn btn-primary">Submit</button>
       <div class="links">
@@ -52,14 +50,23 @@ export default {
   methods: {
     login() {
       this.$store.dispatch('signIn', this.payload)
+      this.$router.push({name: 'homeView'});
     }
   }
 };
 </script>
+
 <style scoped>
+.form-control {
+  border: none;
+  background: transparent;
+  border-bottom: .1rem solid black;
+  border-radius: 0;
+  outline: none;
+}
 .log {
   background-color: black;
-  height: 92vh;
+  height: 100vh;
   display: flex;
   background-image: url(https://i.postimg.cc/cHr4pgTJ/464155.webp);
   background-repeat: no-repeat;

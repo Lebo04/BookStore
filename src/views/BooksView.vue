@@ -2,6 +2,7 @@
   <h1 class="title">Books</h1>
 
   <button @click="sortingItems()">Price sort</button>
+  <input type="text" @keypress="searching()">
 
   <div v-if="books == undefined">
     <SpinnerComp />
