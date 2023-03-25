@@ -12,8 +12,8 @@
                     style="border-top-left-radius: .5rem; border-bottom-left-radius: .5rem;">
                     <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava1-bg.webp"
                       alt="Avatar" class="img-fluid my-5" style="width: 80px;" />
-                    <h5>Marie Horwitz</h5>
-                    <p>Web Designer</p>
+                    <h5>{{loggedUser.firstName}} {{loggedUser.lastName}}</h5>
+                    <p>User</p>
                     <i class="far fa-edit mb-5"></i>
                   </div>
                   <div class="col-md-8">
@@ -23,11 +23,11 @@
                       <div class="row pt-1">
                         <div class="col-6 mb-3">
                           <h6>Email</h6>
-                          <p class="text-muted">info@example.com</p>
+                          <p class="text-muted">{{loggedUser.emailAdd}}</p>
                         </div>
                         <div class="col-6 mb-3">
                           <h6>Phone</h6>
-                          <p class="text-muted">123 456 789</p>
+                          <p class="text-muted">{{loggedUser.cellphoneNum}}</p>
                         </div>
                       </div>
                       <h6>Projects</h6>

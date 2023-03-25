@@ -55,7 +55,7 @@ export default {
 .home h2::after {
   width: .125em;
   background-color: black;
-  animation: typewriter 4s steps(34) forwards, blink typewriter 4s steps(34) infinite;
+  animation: typewriter 4s steps(34) forwards, blink typewriter 4s steps(34) forwards;
 }
 
 @keyframes typewriter {

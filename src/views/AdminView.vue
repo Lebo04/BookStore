@@ -68,6 +68,7 @@
         </table>
     
         <h2>Products table</h2>
+        <AddItem/>
         <table class="table table-striped table-hover table">
           <thead>
             <tr>
@@ -76,7 +77,6 @@
               <th>Price</th>
               <th>Category</th>
               <th>Description</th>
-              <th>Quantity</th>
               <th>Author</th>
               <th>Published date</th>
               <th>Edit</th>
@@ -90,7 +90,6 @@
               <td>{{ item.price }}</td>
               <td>{{ item.category }}</td>
               <td>{{ item.prodDescription }}</td>
-              <td>{{ item.prodQuantity }}</td>
               <td>{{ item.author }}</td>
               <td>{{ item.publishDate }}</td>
               <td>
@@ -114,7 +113,12 @@
     </div>
 </template>
 <script>
+import AddItem from '../components/AddItem.vue'
 export default {
+    name: 'adminPage',
+    components: {
+        AddItem
+    },
   computed: {
     users() {
       return this.$store.state.Users;

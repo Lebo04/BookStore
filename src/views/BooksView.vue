@@ -1,40 +1,42 @@
 <template>
-  <h1 class="title">Books</h1>
+  <div class="books" style="background-color: lightslategray;">
+    <h1 class="title">Books</h1>
 
-  <button @click="sortingItems()">Price sort</button>
-  <input type="text" @keypress="searching()">
+    <button @click="sortingItems()">Price sort</button>
 
-  <div v-if="books == undefined">
-    <SpinnerComp />
-  </div>
+    <div v-if="books == undefined">
+      <SpinnerComp />
+    </div>
 
-  <div class="container">
-    <div class="row">
-      <div class="col-md-6 g-3" v-for="book in books" :key="book.id">
-        <div class="card" style="width: 30rem; height: 16rem">
-          <div>
-            <img
-              :src="book.imgURL"
-              class="card-img-top"
-              :alt="book.prodName"
-              style="width: 15rem; height: 16rem"
-            />
-          </div>
+    <div class="container">
+      <div class="row">
+        <div class="col-md-6 g-3" v-for="book in books" :key="book.id">
+          <div class="card" style="width: 30rem; height: 16rem">
+            <div>
+              <img
+                :src="book.imgURL"
+                class="card-img-top"
+                :alt="book.prodName"
+                style="width: 15rem; height: 16rem"
+              />
+            </div>
 
-          <div class="card-body">
-            <h5 class="card-title">{{ book.prodName }}</h5>
-            <h6>Genre: {{ book.category }}</h6>
-            <h6>Price: {{ book.price }}</h6>
-            <router-link
-              v-if="this.$store.state.userAuth"
-              :to="{ name: 'single', params: { id: book.id } }"
-              >View more..</router-link
-            >
-            <router-link
-              v-if="this.$store.state.userAuth"
-              :to="{ name: 'cart', params: { id: book.id } }"
-              >Add to cart</router-link
-            >
+            <div class="card-body">
+              <h5 class="card-title">{{ book.prodName }}</h5>
+              <h6>Genre: {{ book.category }}</h6>
+              <h6>Price: {{ book.price }}</h6>
+              <router-link
+                v-if="this.$store.state.userAuth"
+                :to="{ name: 'single', params: { id: book.id } }"
+                >View more..</router-link
+              >
+              <br />
+              <router-link
+                v-if="this.$store.state.userAuth"
+                :to="{ name: 'cart', params: { id: book.id } }"
+                ><i class="fa-solid fa-cart-shopping"></i
+              ></router-link>
+            </div>
           </div>
         </div>
       </div>
@@ -55,7 +57,9 @@ export default {
     spinner() {
       return this.$store.state.spinnerShow;
     },
-    
+    loggedUser() {
+      return this.$store.state.loggedUser;
+    },
   },
   created() {
     this.$store.dispatch("getItems");
@@ -68,6 +72,11 @@ export default {
 };
 </script>
 <style scoped>
+li {
+  list-style: none;
+  text-decoration: none;
+  color: crimson;
+}
 .card {
   display: flex;
   flex-direction: row;

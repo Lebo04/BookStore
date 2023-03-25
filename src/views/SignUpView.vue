@@ -2,12 +2,7 @@
   <div class="register">
     <div class="divider">
       <div style="width: 20rem;">
-        <p>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Quidem,
-          deleniti, architecto suscipit, natus neque adipisci reprehenderit
-          molestias corporis earum pariatur veniam non numquam id quam? Eaque
-          accusamus autem magni pariatur.
-        </p>
+        <img src="https://i.postimg.cc/SxP8LWHz/th.jpg" alt="" style="height: 20rem;">
       </div>
       <div>
         <div class="form-control-wrapper">
@@ -189,7 +184,7 @@ export default {
 }
 
 .container-fluid .row {
-  margin-left: -1.5rem;
+  margin-left: -1.5rem; 
 }
 
 span,

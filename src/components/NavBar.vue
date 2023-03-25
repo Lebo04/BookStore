@@ -27,7 +27,7 @@
                     <a class="nav-link"><router-link to="/cart">Cart</router-link></a>
                   </li>
                   <li class="nav-item">
-                    <a class="nav-link"><router-link to="/admin">Admin</router-link></a>
+                    <a class="nav-link"><router-link to="/adminLog">Admin</router-link></a>
                   </li>
                   <li class="nav-item">
                     <a class="nav-link"><router-link to="/profile">Profile</router-link></a>

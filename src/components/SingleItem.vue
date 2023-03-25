@@ -17,11 +17,14 @@
       </div>
       <div class="col">
         <h6>Book Genre: {{ book?.category }}</h6>
-        <h6>Price: R{{book?.price}}</h6>
+        <h6>Price: R{{ book?.price }}</h6>
         <p>
           {{ book?.prodDescription }}
         </p>
-        <button><i class="fa-duotone fa-cart-shopping"></i></button>
+
+        <button type="submit" @click="addToCart"><i class="fa-solid fa-cart-shopping"></i
+          ></button>
+
       </div>
     </div>
   </div>
@@ -36,6 +39,9 @@ export default {
     book() {
       return this.$store.state.book;
     },
+    loggedUser() {
+      return this.$store.state.loggedUser;
+    },
   },
   created() {
     this.$store.dispatch("getItem", this.$route.params.id);
@@ -43,7 +49,14 @@ export default {
 
   methods: {
     addToCart() {
-      this.$store.dispatch("addToCart");
+      this.$store.dispatch("addToCart", {
+        userID: this.loggedUser?.userID,
+        id: this.book.id,
+        quantity: 1,
+        prodName: this.book.prodName,
+        price: this.book.price,
+        imgURL: this.book.imgURL
+      });
     },
   },
 };

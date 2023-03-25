@@ -41,6 +41,9 @@ export default createStore({
     setAdmins(state, value) {
       state.Admins = value;
     },
+    setAdmin(state, value) {
+      state.admin = value;
+    },
     setMessage(state, value) {
       state.message = value;
     },
@@ -63,18 +66,6 @@ export default createStore({
       }
       state.asc = !state.asc;
     },
-    // filtering: (state) => {
-    //   try {
-    //     if (!shoe.value.length) throw "Enter a shoe name";
-    //     heelsList = heelsList.filter((items) => {
-    //       return state.proName.toLowerCase().includes(shoe.value.toLowerCase());
-    //     });
-    //     if (!heelsList.length) throw "This shoe is not yet available";
-    //     display();
-    //   } catch (data) {
-    //     item.innerHTML = data;
-    //   } 
-    // }
   },
 
   actions: {
@@ -97,11 +88,30 @@ export default createStore({
         context.commit("setMessage", err);
       }
     },
+    async getCartItem(context, id) {
+      const res = await axios.get(`${bookURL}/user/${id}/carts`);
+      console.log(id);
+      const { results, err } = await res.data;
+      if (results) {
+        context.commit("setCart", results);
+      } else {
+        context.commit("setMessage", err);
+      }
+    },
     async getUsers(context) {
       const res = await axios.get(`${bookURL}/users`);
       const { results, err } = await res.data;
       if (results) {
         context.commit("setUsers", results);
+      } else {
+        context.commit("setMessage", err);
+      }
+    },
+    async getUser(context, id) {
+      const res = await axios.get(`${bookURL}/user/${id}`);
+      const { result, err } = await res.data;
+      if (result) {
+        context.commit("setUser", result);
       } else {
         context.commit("setMessage", err);
       }
@@ -130,11 +140,34 @@ export default createStore({
         context.commit("setMessage", err);
       }
     },
+    async AdminSignIn(context, payload) {
+      const res = await axios.post(`${bookURL}/signIn`, payload);
+      const { result, msg, err, token } = await res.data;
+      if (result) {
+        context.commit("setLoggedUser", result);
+        console.log(result);
+        context.commit("setMessage", msg);
+        cookies.set("RightUser", token);
+      } else {
+        context.commit("setMessage", err);
+      }
+    },
     async getAdmins(context) {
       const res = await axios.get(`${bookURL}/admins`);
       const { results, err } = await res.data;
       if (results) {
         context.commit("setAdmins", results);
+      } else {
+        context.commit("setMessage", err);
+      }
+    },
+    async registerAdmin(context, payload) {
+      console.log("Statement 1 reached");
+      const res = await axios.post(`${bookURL}/registerAdmin`, payload);
+      console.log("Statement 2 reached");
+      const { result, err } = await res.data;
+      if (result) {
+        context.commit("setAdmin", result);
       } else {
         context.commit("setMessage", err);
       }
@@ -178,15 +211,14 @@ export default createStore({
         context.commit("setMessage", err);
       }
     },
-    async addToCart(context, id) {
+    async addToCart(context, payload) {
       console.log("Statement 1 reached");
-      const res = await axios.post(`${bookURL}/user/${id}/cart`);
+      const res = await axios.post(`${bookURL}/user/${payload.userID}/cart`, payload);
       console.log("Statement 2 reached");
-      const { result, err, token } = await res.data;
-      if (result) {
-        console.log(result);
-        cookies.get('RightUser', token)
-        context.commit("setCart", result);
+      const { msg, err } = await res.data;
+      if (msg) {
+        console.log(msg);
+        context.commit("setMessage", msg);
       } else {
         context.commit("setMessage", err);
       }

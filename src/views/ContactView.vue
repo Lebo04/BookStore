@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div style="background-color: lightslategray;">
       <section>
          <div class="contact">
            <div class="cont">

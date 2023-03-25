@@ -1,6 +1,9 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '../views/HomeView.vue'
 import ForgotPassword from '../components/ForgotPassword.vue'
+import WelcomeComp from '../components/WelcomeComp.vue'
+import AdminLog from '../components/AdminLog.vue'
+import AdminSign from '../components/AdminSign.vue'
 
 
 const routes = [
@@ -36,7 +39,7 @@ const routes = [
   },
   {
     path: '/admin',
-    name: 'admin',
+    name: 'adminPage',
     component: () => import('../views/AdminView.vue')
   },
   {
@@ -52,6 +55,21 @@ const routes = [
   {
     path: '/forgot',
     component: ForgotPassword
+  },
+  {
+    path: '/welcome',
+    name: 'welcomeComp',
+    component: WelcomeComp
+  },
+  {
+    path: '/adminLog',
+    name: 'adminLog',
+    component: AdminLog
+  },
+  {
+    path: '/adminSign',
+    name: 'adminSign',
+    component: AdminSign
   },
   {
     path: '/profile',
