@@ -19,6 +19,22 @@ route.post("/login", bodyParser.json(), (req, res) => {
   user.login(req, res);
 });
 
+// route.get('/forgotPassword', (req, res) => {
+//   res.render('forgotPassword')
+// })
+
+// route.post('/forgotPassword', (req, res) => {
+//   user.forgotPassword(req, res);
+// }) 
+
+// route.get('/resetPassword/:id/token', (req, res) => {
+  
+// })
+
+// route.post('/resetPassword/:id/token', (req, res) => {
+  
+// })
+
 route.get("/users", (req, res) => {
   user.getUsers(req, res);
 });
@@ -92,23 +108,23 @@ route.get("/user/:id/carts", (req, res) => {
 });
 
 route.get("/user/:id/cart", (req, res) => {
-  item.getCartItem(req, res);
+  cart.getCartItem(req, res);
 });
 
 route.post("/user/:id/cart", bodyParser.json(), (req, res) => {
-  item.addToCart(req, res);
+  cart.addToCart(req, res);
 });
 
 route.put("/user/:id/cart/:id", bodyParser.json(), (req, res) => {
-  item.updateCart(req, res);
+  cart.updateCart(req, res);
 });
 
 route.delete("/user/:id/cart", (req, res) => {
-  item.deleteCart(req, res);
+  cart.deleteCart(req, res);
 });
 
 route.delete("/user/:id/cart/:id", (req, res) => {
-  item.deleteCart(req, res);
+  cart.deleteCart(req, res);
 });
 
 module.exports = route;

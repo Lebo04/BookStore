@@ -16,7 +16,11 @@ class User {
         INSERT INTO Users
         SET ?;
         `;
-    db.query(strQry, [detail], (err) => {
+    db.query(strQry, [detail], async (err) => {
+      const emailExist = await strQry.findOne({emailAdd: req.body.emailAdd})
+      if (emailExist) return res.status(400).send('Email already exist')
+
+      
       if (err) {
         res.status(401).json({ err });
       } else {
@@ -36,7 +40,7 @@ class User {
         FROM Users
         WHERE emailAdd = '${emailAdd}';
     `;
- 
+
     db.query(strQry, async (err, data) => {
       if (err) throw err;
       if (!data || data == null) {
@@ -67,6 +71,65 @@ class User {
       }
     });
   }
+  // forgotPassword(req, res) {
+  //   const { emailAdd } = req.body;
+  //   const strQry = `
+  //   SELECT userID, firstName, lastName, emailAdd, userPass
+  //       FROM Users
+  //       WHERE emailAdd = '${emailAdd}'; 
+  //   `;
+  //   db.query(strQry, async (err, data) => {
+  //     try {
+  //       const oldUser = await strQry.findOne({emailAdd});
+  //       if (!oldUser) {
+  //         return res.send('User does not exist');
+  //       }
+  //       const secret = SECRET_KEY + oldUser.userPass;
+  //       const token = createToken.toString({emailAdd: oldUser.emailAdd, userID: oldUser.userID}, secret,{expiresIn: '5m'});
+  //       const link = `http://localhost:3000/resetPassword/${oldUser.userId}/${token}`
+  //     } catch (error) {
+        
+  //     }
+  //   })
+
+  //   // if (email !== emailAdd) {
+  //   //   res.send("User not registered");
+  //   //   return;
+  //   // }
+
+  //   // const secret = SECRET_KEY + userPass;
+  //   // const payload = {
+  //   //   emailAdd: emailAdd,
+  //   //   userID: userID,
+  //   // };
+  //   // const token = createToken.sign(payload, secret, { expiresIn: "15m" });
+  //   // const link = `http://localhost:3000/resetPassword/${userId}/${token}`;
+
+  //   // res.send("Password reset link has been sent to your email...");
+  // }
+  // resetPassword(req, res) {
+  //   const {userID, token} = req.params;
+  //   const strQry = `
+  //   SELECT userID, firstName, lastName, emailAdd, userPass
+  //       FROM Users
+  //       WHERE emailAdd = '${emailAdd}'; 
+  //   `;
+
+  //   db.query(strQry, [req.params.id], (err, data) => {
+  //     if (userID !== userID) {
+  //       res.send('Invalid id')
+  //       return
+  //     }
+  //     const secret = SECRET_KEY + userPass
+  //     try {
+  //       const payload = createToken.verify(token, secret)
+  //       res.render('resetPassword', {email: emailAdd})
+  //     } catch (error) {
+  //       res.send(error.message)
+  //     }
+  //   });
+
+  // }
   updateUser(req, res) {
     const detail = req.body;
     if (detail.userPass != null || detail.userPass != undefined)
@@ -341,12 +404,12 @@ class Cart {
         INSERT INTO Cart
         SET ?
         `;
-    db.query(strQry, [req.body], (err) => {
+    db.query(strQry, [req.body], (err, result) => {
       if (err) {
         console.log(err);
         res.status(400).json({ err: "Unable to add to cart" });
       } else {
-        res.status(200).json({ msg: "Successfully added to the cart" });
+        res.status(200).json({ msg: "Successfully added to the cart",result });
       }
     });
   }
@@ -409,5 +472,5 @@ module.exports = {
   Item,
   User,
   Admin,
-  Cart
+  Cart,
 };
